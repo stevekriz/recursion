@@ -4,31 +4,42 @@
 // but you don't so you're going to write it from scratch:
 
 var stringifyJSON = function(obj) {
-  if (typeof obj === 'string') {
-    return '"' + obj + '"';
-  }
   if (Array.isArray(obj)) {
-    let result = [];
+    let results = [];
     for (let i = 0; i < obj.length; i++) {
-      result.push(stringifyJSON(obj[i]));
+      results.push(stringifyJSON(obj[i]));
     }
-    return '[' + result.join(',') + ']';
-  }
-  if (obj instanceof Object) {
-    let result = [];
-    var objectKeys = Object.keys(obj);
-    objectKeys.forEach(function(key) {
-      var keyOut = '"' + key + '"';
-      var keyValue = obj[key];
-      if (typeof keyValue === 'string') {
-        result.push(keyOut + '"' + keyValue + '"');
-      } else if (keyValue instanceof Object) {
-        result.push(keyOut + stringifyJson(keyValue));
-      } else {
-        result.push(keyOut + keyValue);
+    return '[' + results.join(',') + ']';
+  } else if (typeof obj === 'object' && obj !== null) {
+    let results = [];
+    for (let key in obj) {
+      if (typeof obj[key] === 'function' || obj[key] === undefined) {
+        continue;
       }
-      return '{' + result + '}';
-    });
+      results.push(stringifyJSON(key) + ':' + stringifyJSON(obj[key]));
+    }
+    return '{' + results.join(',') + '}';
+  } else if (typeof obj === 'string') {
+    return '"' + obj + '"';
   }
   return '' + obj;
 };
+
+// May come back to revisit this:
+// else if (obj instanceof Object) {
+//   let result = [];
+//   var objectKeys = Object.keys(obj);
+//   objectKeys.forEach(function(key) {
+//     var keyOut = '"' + key + '":';
+//     var keyValue = obj[key];
+//     if (typeof keyValue === undefined || keyValue instanceof Function) {
+//       result.push('');
+//     } else if (typeof keyValue === 'string') {
+//       result.push(keyOut + '"' + keyValue + '"');
+//     } else if (keyValue instanceof Object) {
+//       result.push(keyOut + stringifyJSON(keyValue));
+//     } else {
+//       result.push(keyOut + keyValue);
+//     }
+//   });
+//   return '{' + result + '}';
