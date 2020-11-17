@@ -4,8 +4,7 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-) {
+var getElementsByClassName = function(className) {
   const targetElements = [];
   const searchNodes = function(node) {
     if (node.classList && node.classList.contains(className)) {
