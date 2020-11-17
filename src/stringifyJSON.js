@@ -2,7 +2,6 @@
 // var stringifyJSON = JSON.stringify;
 
 // but you don't so you're going to write it from scratch:
-
 var stringifyJSON = function(obj) {
   if (Array.isArray(obj)) {
     let results = [];
@@ -24,22 +23,3 @@ var stringifyJSON = function(obj) {
   }
   return '' + obj;
 };
-
-// May come back to revisit this:
-// else if (obj instanceof Object) {
-//   let result = [];
-//   var objectKeys = Object.keys(obj);
-//   objectKeys.forEach(function(key) {
-//     var keyOut = '"' + key + '":';
-//     var keyValue = obj[key];
-//     if (typeof keyValue === undefined || keyValue instanceof Function) {
-//       result.push('');
-//     } else if (typeof keyValue === 'string') {
-//       result.push(keyOut + '"' + keyValue + '"');
-//     } else if (keyValue instanceof Object) {
-//       result.push(keyOut + stringifyJSON(keyValue));
-//     } else {
-//       result.push(keyOut + keyValue);
-//     }
-//   });
-//   return '{' + result + '}';
