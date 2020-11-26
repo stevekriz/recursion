@@ -4,16 +4,36 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className) {
-  const targetElements = [];
-  const searchNodes = function(node) {
-    if (node.classList && node.classList.contains(className)) {
-      targetElements.push(node);
-    }
-    for (let i = 0; i < node.childNodes.length; i++) {
-      searchNodes(node.childNodes[i]);
-    }
-  };
-  searchNodes(document.body);
+
+//Without helper function
+const getElementsByClassName = (className, element = document.body) => {
+  let targetElements = [];
+
+  if (element.classList && _.contains(element.classList, className)) {
+    targetElements.push(element);
+  }
+
+  _.each(element.childNodes, child => {
+    targetElements = targetElements.concat(getElementsByClassName(className, child));
+  });
+
   return targetElements;
 };
+
+// //With helper function
+// const getElementsByClassName = className => {
+//   const targetElements = [];
+
+//   const searchNodes = element => {
+//     if (element.classList && _.contains(element.classList, className)) {
+//       targetElements.push(element);
+//     }
+//     _.each(element.childNodes, child => {
+//       searchNodes(child);
+//     });
+//   };
+
+//   searchNodes(document.body);
+
+//   return targetElements;
+// };

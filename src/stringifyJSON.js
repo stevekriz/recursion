@@ -2,24 +2,61 @@
 // var stringifyJSON = JSON.stringify;
 
 // but you don't so you're going to write it from scratch:
-var stringifyJSON = function(obj) {
-  if (Array.isArray(obj)) {
-    let results = [];
-    for (let i = 0; i < obj.length; i++) {
-      results.push(stringifyJSON(obj[i]));
-    }
-    return '[' + results.join(',') + ']';
-  } else if (typeof obj === 'object' && obj !== null) {
-    let results = [];
-    for (let key in obj) {
-      if (typeof obj[key] === 'function' || obj[key] === undefined) {
-        continue;
-      }
-      results.push(stringifyJSON(key) + ':' + stringifyJSON(obj[key]));
-    }
-    return '{' + results.join(',') + '}';
-  } else if (typeof obj === 'string') {
-    return '"' + obj + '"';
-  }
-  return '' + obj;
+
+//With helper functions
+const stringifyArray = array => {
+  return '[' + _.map(array, element => {
+    return stringifyJSON(element);
+  }).join(',') + ']';
 };
+
+const stringifyObject = object => {
+  const strings = [];
+
+  _.each(object, (value, key) => {
+    if (_.isFunction(value) || _.isUndefined(value)) {
+      return;
+    }
+
+    strings.push(stringifyJSON(key) + ':' + stringifyJSON(value));
+  });
+
+  return '{' + strings.join(',') + '}';
+};
+
+const stringifyJSON = obj => {
+  if (_.isArray(obj)) {
+    return stringifyArray(obj);
+  } else if (_.isObject(obj)) {
+    return stringifyObject(obj);
+  } else if (_.isString(obj)) {
+    return '"' + obj + '"';
+  } else {
+    return '' + obj;
+  }
+};
+
+// //Without helper functions
+// const stringifyJSON = obj => {
+//   if (_.isArray(obj)) {
+//     return '[' + _.map(obj, element => {
+//       return stringifyJSON(element);
+//     }).join(',') + ']';
+//   } else if (_.isObject(obj)) {
+//     const strings = [];
+
+//     _.each(obj, (value, key) => {
+//       if (_.isFunction(value) || _.isUndefined(value)) {
+//         return;
+//       }
+
+//       strings.push(stringifyJSON(key) + ':' + stringifyJSON(value));
+//     });
+
+//     return '{' + strings.join(',') + '}';
+//   } else if (_.isString(obj)) {
+//     return '"' + obj + '"';
+//   } else {
+//     return '' + obj;
+//   }
+// };
