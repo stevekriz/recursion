@@ -5,6 +5,23 @@
   "scripts": {
     "start": "npx live-server"
   },
-  "author": "Hack Reactor <curriculum.team@hackreactor.com>",
-  "license": "UNLICENSED"
+  "author": "Steve Kriz",
+  "license": "UNLICENSED",
+  "main": ".eslintrc.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "devDependencies": {
+    "eslint": "^7.21.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevekriz/recursion-review.git"
+  },
+  "bugs": {
+    "url": "https://github.com/stevekriz/recursion-review/issues"
+  },
+  "homepage": "https://github.com/stevekriz/recursion-review#readme"
 }

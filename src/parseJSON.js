@@ -1,8 +1,9 @@
-// this is what you would do if you were one to do things the easy way:
-// var parseJSON = JSON.parse;
+/* eslint-disable no-use-before-define */
+/* eslint-disable default-case */
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 
-// but you're not, so you'll write it from scratch:
-const parseJSON = json => {
+const parseJSON = (json) => {
   // The index of the current character
   let index = 0;
 
@@ -16,14 +17,14 @@ const parseJSON = json => {
     f: '\f',
     n: '\n',
     r: '\r',
-    t: '\t'
+    t: '\t',
   };
 
   // Move to the next character and check that it is what we expect
-  const nextCh = c => {
+  const nextCh = (c) => {
     // If ch is not what we expect, error
     if (c && c !== ch) {
-      throw new SyntaxError('Expected "' + c + '" instead of "' + ch + '"');
+      throw new SyntaxError(`Expected "${c}" instead of "${ch}"`);
     }
 
     ch = json.charAt(index);
@@ -33,7 +34,6 @@ const parseJSON = json => {
   };
 
   const numberParse = () => {
-    let number;
     let string = '';
 
     if (ch === '-') {
@@ -65,7 +65,7 @@ const parseJSON = json => {
       }
     }
 
-    number = parseFloat(string, 10);
+    const number = parseFloat(string, 10);
 
     // Check that number is valid
     if (!_.isFinite(number)) {
@@ -76,7 +76,8 @@ const parseJSON = json => {
   };
 
   const stringParse = () => {
-    let hex, i, unicodeValue;
+    let hex; let i; let
+      unicodeValue;
     let string = '';
 
     if (ch === '"') {
@@ -121,27 +122,27 @@ const parseJSON = json => {
 
   const booleanParse = () => {
     switch (ch) {
-    case 't':
-      nextCh('t');
-      nextCh('r');
-      nextCh('u');
-      nextCh('e');
-      return true;
-    case 'f':
-      nextCh('f');
-      nextCh('a');
-      nextCh('l');
-      nextCh('s');
-      nextCh('e');
-      return false;
-    case 'n':
-      nextCh('n');
-      nextCh('u');
-      nextCh('l');
-      nextCh('l');
-      return null;
+      case 't':
+        nextCh('t');
+        nextCh('r');
+        nextCh('u');
+        nextCh('e');
+        return true;
+      case 'f':
+        nextCh('f');
+        nextCh('a');
+        nextCh('l');
+        nextCh('s');
+        nextCh('e');
+        return false;
+      case 'n':
+        nextCh('n');
+        nextCh('u');
+        nextCh('l');
+        nextCh('l');
+        return null;
     }
-    throw new SyntaxError('Unexpected "' + ch + '"');
+    throw new SyntaxError(`Unexpected "${ch}"`);
   };
 
   const arrayParse = () => {
@@ -186,7 +187,7 @@ const parseJSON = json => {
         compressWhitespace();
         nextCh(':');
         if (Object.hasOwnProperty.call(object, key)) {
-          throw new SyntaxError('Duplicate key "' + key + '"');
+          throw new SyntaxError(`Duplicate key "${key}"`);
         }
         object[key] = initiateParse();
         compressWhitespace();
@@ -205,16 +206,16 @@ const parseJSON = json => {
   const initiateParse = () => {
     compressWhitespace();
     switch (ch) {
-    case '{':
-      return objectParse();
-    case '[':
-      return arrayParse();
-    case '"':
-      return stringParse();
-    case '-':
-      return numberParse();
-    default:
-      return ch >= '0' && ch <= '9' ? numberParse() : booleanParse();
+      case '{':
+        return objectParse();
+      case '[':
+        return arrayParse();
+      case '"':
+        return stringParse();
+      case '-':
+        return numberParse();
+      default:
+        return ch >= '0' && ch <= '9' ? numberParse() : booleanParse();
     }
   };
 
