@@ -90,7 +90,7 @@ const parseJSON = (json) => {
 
           if (ch === "u") {
             unicodeValue = 0;
-            for (i = 0; i < 4; i += 1) {
+            for (i = 0; i < 4; i++) {
               hex = parseInt(next(), 16);
 
               if (!_.isFinite(hex)) break;
