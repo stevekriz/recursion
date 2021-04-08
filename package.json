@@ -1,27 +1,23 @@
 {
-  "name": "recursion-review",
+  "name": "recursion",
   "version": "1.0.0",
-  "description": "recursion-review",
-  "scripts": {
-    "start": "npx live-server"
-  },
-  "author": "Steve Kriz",
-  "license": "UNLICENSED",
-  "main": ".eslintrc.js",
+  "description": "",
+  "main": "index.js",
   "directories": {
     "lib": "lib"
   },
-  "devDependencies": {
-    "eslint": "^7.21.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-plugin-import": "^2.22.1"
+  "scripts": {
+    "start": "npx live-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stevekriz/recursion-review.git"
+    "url": "git+https://github.com/stevekriz/recursion.git"
   },
+  "author": "Steve Kriz",
+  "license": "ISC",
   "bugs": {
-    "url": "https://github.com/stevekriz/recursion-review/issues"
+    "url": "https://github.com/stevekriz/recursion/issues"
   },
-  "homepage": "https://github.com/stevekriz/recursion-review#readme"
+  "homepage": "https://github.com/stevekriz/recursion#readme"
 }

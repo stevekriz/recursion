@@ -1,8 +1,5 @@
-/* eslint-disable no-undef */
-// test cases are described in fixtures.js
-
-describe('stringifyJSON', () => {
-  it('should match the result of calling JSON.stringify', () => {
+describe("stringifyJSON", () => {
+  it("should match the result of calling JSON.stringify", () => {
     stringifiableObjects.forEach((test) => {
       const expected = JSON.stringify(test);
       const result = stringifyJSON(test);

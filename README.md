@@ -1,2 +1,1 @@
-# recursion-review
-Recursion practice.
+# recursion
