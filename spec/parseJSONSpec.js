@@ -2,7 +2,7 @@
 
 describe("parseJSON", () => {
   it("should match the result of calling JSON.parse", () => {
-    parseableStrings.forEach((test) => {
+    parseableStrings.forEach(test => {
       const expected = JSON.parse(test);
       const result = parseJSON(test);
       const equality = _.isEqual(result, expected);
@@ -11,7 +11,7 @@ describe("parseJSON", () => {
   });
 
   it("should throw an error for invalid stringified JSON", () => {
-    unparseableStrings.forEach((test) => {
+    unparseableStrings.forEach(test => {
       const fn = function () {
         parseJSON(test);
       };

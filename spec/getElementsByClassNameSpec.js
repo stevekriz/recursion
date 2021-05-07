@@ -12,7 +12,7 @@ describe("getElementsByClassName", () => {
   it("should match the results of calling the built-in function", () => {
     $("body").addClass("targetClassName");
 
-    htmlStrings.forEach((htmlString) => {
+    htmlStrings.forEach(htmlString => {
       const $rootElement = $(htmlString);
       $("body").append($rootElement);
 

@@ -1,11 +1,11 @@
-const stringifyArray = (array) =>
-  `[${_.map(array, (element) => stringifyJSON(element)).join(",")}]`;
+const stringifyArray = array =>
+  `[${array.map(element => stringifyJSON(element)).join(",")}]`;
 
-const stringifyObject = (object) => {
+const stringifyObject = object => {
   const strings = [];
 
   _.each(object, (value, key) => {
-    if (_.isFunction(value) || _.isUndefined(value)) return;
+    if (typeof value === "function" || value === undefined) return;
 
     strings.push(`${stringifyJSON(key)}:${stringifyJSON(value)}`);
   });
@@ -13,9 +13,9 @@ const stringifyObject = (object) => {
   return `{${strings.join(",")}}`;
 };
 
-const stringifyJSON = (obj) => {
-  if (_.isArray(obj)) return stringifyArray(obj);
+const stringifyJSON = obj => {
+  if (Array.isArray(obj)) return stringifyArray(obj);
   if (_.isObject(obj)) return stringifyObject(obj);
-  if (_.isString(obj)) return `"${obj}"`;
+  if (typeof obj === "string") return `"${obj}"`;
   return `${obj}`;
 };
