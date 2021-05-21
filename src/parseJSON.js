@@ -3,16 +3,16 @@ const parseJSON = json => {
   let index = 0;
 
   // The current character
-  let ch = " ";
+  let ch = ' ';
   const escapee = {
     '"': '"',
-    "\\": "\\",
-    "/": "/",
-    b: "\b",
-    f: "\f",
-    n: "\n",
-    r: "\r",
-    t: "\t",
+    '\\': '\\',
+    '/': '/',
+    b: '\b',
+    f: '\f',
+    n: '\n',
+    r: '\r',
+    t: '\t',
   };
 
   // Move to the next character and check that it is what we expect
@@ -28,37 +28,37 @@ const parseJSON = json => {
   };
 
   const numberParse = () => {
-    let string = "";
+    let string = '';
 
-    if (ch === "-") {
-      string = "-";
-      nextCh("-");
+    if (ch === '-') {
+      string = '-';
+      nextCh('-');
     }
 
-    while (ch >= "0" && ch <= "9") {
+    while (ch >= '0' && ch <= '9') {
       string += ch;
       nextCh();
     }
 
-    if (ch === ".") {
+    if (ch === '.') {
       string += ch;
 
-      while (nextCh() && ch >= "0" && ch <= "9") {
+      while (nextCh() && ch >= '0' && ch <= '9') {
         string += ch;
       }
     }
 
     // Scientific notation
-    if (ch === "e" || ch === "E") {
+    if (ch === 'e' || ch === 'E') {
       string += ch;
       nextCh();
 
-      if (ch === "-" || ch === "+") {
+      if (ch === '-' || ch === '+') {
         string += ch;
         nextCh();
       }
 
-      while (ch >= "0" && ch <= "9") {
+      while (ch >= '0' && ch <= '9') {
         string += ch;
         nextCh();
       }
@@ -67,7 +67,7 @@ const parseJSON = json => {
     const number = parseFloat(string, 10);
 
     // Check that number is valid
-    if (!_.isFinite(number)) throw new SyntaxError("Bad number");
+    if (!_.isFinite(number)) throw new SyntaxError('Bad number');
     else return number;
   };
 
@@ -75,7 +75,7 @@ const parseJSON = json => {
     let hex;
     let i;
     let unicodeValue;
-    let string = "";
+    let string = '';
 
     if (ch === '"') {
       while (nextCh()) {
@@ -85,10 +85,10 @@ const parseJSON = json => {
         }
 
         // Parse escaped characters
-        if (ch === "\\") {
+        if (ch === '\\') {
           nextCh();
 
-          if (ch === "u") {
+          if (ch === 'u') {
             unicodeValue = 0;
             for (i = 0; i < 4; i++) {
               hex = parseInt(next(), 16);
@@ -109,36 +109,36 @@ const parseJSON = json => {
       }
     }
 
-    throw new SyntaxError("Bad string");
+    throw new SyntaxError('Bad string');
   };
 
   // Remove whitespace between characters
   const compressWhitespace = () => {
-    while (ch && ch <= " ") {
+    while (ch && ch <= ' ') {
       nextCh();
     }
   };
 
   const booleanParse = () => {
     switch (ch) {
-      case "t":
-        nextCh("t");
-        nextCh("r");
-        nextCh("u");
-        nextCh("e");
+      case 't':
+        nextCh('t');
+        nextCh('r');
+        nextCh('u');
+        nextCh('e');
         return true;
-      case "f":
-        nextCh("f");
-        nextCh("a");
-        nextCh("l");
-        nextCh("s");
-        nextCh("e");
+      case 'f':
+        nextCh('f');
+        nextCh('a');
+        nextCh('l');
+        nextCh('s');
+        nextCh('e');
         return false;
-      case "n":
-        nextCh("n");
-        nextCh("u");
-        nextCh("l");
-        nextCh("l");
+      case 'n':
+        nextCh('n');
+        nextCh('u');
+        nextCh('l');
+        nextCh('l');
         return null;
     }
 
@@ -148,12 +148,12 @@ const parseJSON = json => {
   const arrayParse = () => {
     const array = [];
 
-    if (ch === "[") {
-      nextCh("[");
+    if (ch === '[') {
+      nextCh('[');
       compressWhitespace();
 
-      if (ch === "]") {
-        nextCh("]");
+      if (ch === ']') {
+        nextCh(']');
         // Array is empty
         return array;
       }
@@ -162,28 +162,28 @@ const parseJSON = json => {
         array.push(initiateParse());
         compressWhitespace();
 
-        if (ch === "]") {
-          nextCh("]");
+        if (ch === ']') {
+          nextCh(']');
           return array;
         }
-        nextCh(",");
+        nextCh(',');
         compressWhitespace();
       }
     }
 
-    throw new SyntaxError("Bad array");
+    throw new SyntaxError('Bad array');
   };
 
   const objectParse = () => {
     let key;
     const object = {};
 
-    if (ch === "{") {
-      nextCh("{");
+    if (ch === '{') {
+      nextCh('{');
       compressWhitespace();
 
-      if (ch === "}") {
-        nextCh("}");
+      if (ch === '}') {
+        nextCh('}');
         // Object is empty
         return object;
       }
@@ -191,7 +191,7 @@ const parseJSON = json => {
       while (ch) {
         key = stringParse();
         compressWhitespace();
-        nextCh(":");
+        nextCh(':');
 
         if (Object.hasOwnProperty.call(object, key))
           throw new SyntaxError(`Duplicate key "${key}"`);
@@ -199,17 +199,17 @@ const parseJSON = json => {
         object[key] = initiateParse();
         compressWhitespace();
 
-        if (ch === "}") {
-          nextCh("}");
+        if (ch === '}') {
+          nextCh('}');
           return object;
         }
 
-        nextCh(",");
+        nextCh(',');
         compressWhitespace();
       }
     }
 
-    throw new SyntaxError("Bad object");
+    throw new SyntaxError('Bad object');
   };
 
   // Initiate parsing of JSON string
@@ -217,23 +217,23 @@ const parseJSON = json => {
     compressWhitespace();
 
     switch (ch) {
-      case "{":
+      case '{':
         return objectParse();
-      case "[":
+      case '[':
         return arrayParse();
       case '"':
         return stringParse();
-      case "-":
+      case '-':
         return numberParse();
       default:
-        return ch >= "0" && ch <= "9" ? numberParse() : booleanParse();
+        return ch >= '0' && ch <= '9' ? numberParse() : booleanParse();
     }
   };
 
   const result = initiateParse();
   compressWhitespace();
 
-  if (ch) throw new SyntaxError("Syntax error");
+  if (ch) throw new SyntaxError('Syntax error');
 
   return result;
 };

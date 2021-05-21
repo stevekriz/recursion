@@ -7,22 +7,22 @@ const stringifiableObjects = [
   null,
   true,
   false,
-  "Hello world",
+  'Hello world',
   [],
   [8],
-  ["hi"],
-  [8, "hi"],
+  ['hi'],
+  [8, 'hi'],
   [1, 0, -1, -0.3, 0.3, 1343.32, 3345, 0.00011999999999999999],
   [8, [[], 3, 4]],
-  [[[["foo"]]]],
+  [[[['foo']]]],
   {},
-  { a: "apple" },
+  { a: 'apple' },
   { foo: true, bar: false, baz: null },
-  { "boolean, true": true, "boolean, false": false, null: null },
+  { 'boolean, true': true, 'boolean, false': false, null: null },
   // basic nesting
-  { a: { b: "c" } },
-  { a: ["b", "c"] },
-  [{ a: "b" }, { c: "d" }],
+  { a: { b: 'c' } },
+  { a: ['b', 'c'] },
+  [{ a: 'b' }, { c: 'd' }],
   { a: [], c: {}, b: true },
 ];
 
@@ -35,15 +35,15 @@ unstringifiableValues = [
 
 parseableStrings = [
   // basic stuff
-  "[]",
+  '[]',
   '{"foo": ""}',
-  "{}",
+  '{}',
   '{"foo": "bar"}',
   '["one", "two"]',
   '{"a": "b", "c": "d"}',
-  "[null,false,true]",
+  '[null,false,true]',
   '{"foo": true, "bar": false, "baz": null}',
-  "[1, 0, -1, -0.3, 0.3, 1343.32, 3345, 0.00011999999999999999]",
+  '[1, 0, -1, -0.3, 0.3, 1343.32, 3345, 0.00011999999999999999]',
   '{"boolean, true": true, "boolean, false": false, "null": null }',
 
   // basic nesting
@@ -92,7 +92,7 @@ parseableStrings = [
     ' "10021" }, "phoneNumber": [ { "type" : "home", ' +
     '"number": "212 555-1234" }, { "type" : "fax", ' +
     '"number": "646 555-4567" } ] }',
-  "{\r\n" +
+  '{\r\n' +
     '          "glossary": {\n' +
     '              "title": "example glossary",\n\r' +
     '      \t\t"GlossDiv": {\r\n' +
@@ -109,13 +109,13 @@ parseableStrings = [
     '                              "para": "A meta-markup language,' +
     ' used to create markup languages such as DocBook.",\r\n' +
     '      \t\t\t\t\t\t"GlossSeeAlso": ["GML", "XML"]\r\n' +
-    "                          },\r\n" +
+    '                          },\r\n' +
     '      \t\t\t\t\t"GlossSee": "markup"\r\n' +
-    "                      }\r\n" +
-    "                  }\r\n" +
-    "              }\r\n" +
-    "          }\r\n" +
-    "      }\r\n",
+    '                      }\r\n' +
+    '                  }\r\n' +
+    '              }\r\n' +
+    '          }\r\n' +
+    '      }\r\n',
 ];
 
 unparseableStrings = ['["foo", "bar"', '["foo", "bar\\"]'];

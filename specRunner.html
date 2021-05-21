@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <title>Mocha Spec Runner</title>
     <link rel="stylesheet" href="lib/mocha/mocha.css" />
@@ -9,7 +9,7 @@
     <script src="lib/chai/chai.js"></script>
     <script src="lib/sinon/sinon.js"></script>
     <script>
-      mocha.setup({ ui: "bdd" });
+      mocha.setup({ ui: 'bdd' });
       window.expect = chai.expect;
       $(function () {
         window.mochaPhantomJS ? mochaPhantomJS.run() : mocha.run();
