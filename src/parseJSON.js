@@ -1,4 +1,4 @@
-const parseJSON = json => {
+const parseJSON = (json) => {
   // The index of the current character
   let index = 0;
 
@@ -16,7 +16,7 @@ const parseJSON = json => {
   };
 
   // Move to the next character and check that it is what we expect
-  const nextCh = c => {
+  const nextCh = (c) => {
     // If ch is not what we expect, error
     if (c && c !== ch)
       throw new SyntaxError(`Expected "${c}" instead of "${ch}"`);

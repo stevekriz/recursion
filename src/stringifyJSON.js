@@ -1,7 +1,7 @@
-const stringifyArray = array =>
-  `[${array.map(element => stringifyJSON(element)).join(',')}]`;
+const stringifyArray = (array) =>
+  `[${array.map((element) => stringifyJSON(element)).join(',')}]`;
 
-const stringifyObject = object => {
+const stringifyObject = (object) => {
   const strings = [];
 
   _.each(object, (value, key) => {
@@ -13,7 +13,7 @@ const stringifyObject = object => {
   return `{${strings.join(',')}}`;
 };
 
-const stringifyJSON = obj => {
+const stringifyJSON = (obj) => {
   if (Array.isArray(obj)) return stringifyArray(obj);
   if (_.isObject(obj)) return stringifyObject(obj);
   if (typeof obj === 'string') return `"${obj}"`;
